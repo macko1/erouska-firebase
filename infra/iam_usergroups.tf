@@ -17,8 +17,8 @@ locals {
 }
 
 resource "google_project_iam_member" "keboola-owner" {
-  role    = "roles/owner"
-  member  = "group:keboola@erouska.cz"
+  role   = "roles/owner"
+  member = "group:keboola@erouska.cz"
 }
 
 resource "google_project_iam_member" "mobile-operations" {

@@ -2,68 +2,69 @@ locals {
 
   register_buid_roles = [
     "roles/cloudfunctions.serviceAgent",
-    "roles/secretmanager.secretAccessor",
     "roles/datastore.user"
   ]
 
   is_buid_active_roles = [
     "roles/cloudfunctions.serviceAgent",
-    "roles/secretmanager.secretAccessor",
-    "roles/datastore.user"
+    "roles/datastore.viewer"
   ]
 
   delete_user_roles = [
     "roles/cloudfunctions.serviceAgent",
-    "roles/secretmanager.secretAccessor",
-    "roles/datastore.user"
+    "roles/firebaseauth.admin"
   ]
 
   delete_buid_roles = [
     "roles/cloudfunctions.serviceAgent",
-    "roles/secretmanager.secretAccessor",
-    "roles/datastore.user"
+    "roles/datastore.user",
+    "roles/storage.objectAdmin"
   ]
 
   delete_uploads_roles = [
     "roles/cloudfunctions.serviceAgent",
-    "roles/secretmanager.secretAccessor",
+    "roles/datastore.viewer",
     "roles/storage.objectAdmin"
   ]
 
-  delete_upload_roles = [
+  delete_upload_task_roles = [
     "roles/cloudfunctions.serviceAgent",
-    "roles/secretmanager.secretAccessor",
     "roles/storage.objectAdmin"
   ]
 
   database_backup_roles = [
     "roles/cloudfunctions.serviceAgent",
-    "roles/secretmanager.secretAccessor",
-    "roles/datastore.importExportAdmin"
+    "roles/datastore.importExportAdmin",
+    "roles/storage.objectAdmin"
   ]
 
   change_push_token_roles = [
     "roles/cloudfunctions.serviceAgent",
-    "roles/secretmanager.secretAccessor",
     "roles/datastore.user"
   ]
 
   aws_poller_roles = [
     "roles/cloudfunctions.serviceAgent",
     "roles/secretmanager.secretAccessor",
-    "roles/datastore.user"
+    "roles/storage.objectViewer",
+    "roles/datastore.viewer",
+    "roles/firebaseauth.viewer"
   ]
 
   delete_old_users_roles = [
     "roles/cloudfunctions.serviceAgent",
-    "roles/secretmanager.secretAccessor",
-    "roles/datastore.user"
+    "roles/firebaseauth.admin"
   ]
 
   delete_user_trigger_roles = [
     "roles/cloudfunctions.serviceAgent",
-    "roles/secretmanager.secretAccessor",
-    "roles/datastore.user"
+    "roles/datastore.user",
+    "roles/storage.objectAdmin"
+  ]
+
+  create_object_trigger_roles = [
+    "roles/cloudfunctions.serviceAgent",
+    "roles/cloudtasks.enqueuer"
   ]
 }
 
@@ -97,10 +98,10 @@ resource "google_project_iam_member" "delete-uploads" {
   member = "serviceAccount:${google_service_account.delete-uploads.email}"
 }
 
-resource "google_project_iam_member" "delete-upload" {
-  count  = length(local.delete_upload_roles)
-  role   = local.delete_upload_roles[count.index]
-  member = "serviceAccount:${google_service_account.delete-upload.email}"
+resource "google_project_iam_member" "delete-upload-task" {
+  count  = length(local.delete_upload_task_roles)
+  role   = local.delete_upload_task_roles[count.index]
+  member = "serviceAccount:${google_service_account.delete-upload-task.email}"
 }
 
 resource "google_project_iam_member" "database-backup" {
@@ -131,4 +132,10 @@ resource "google_project_iam_member" "delete-user-trigger" {
   count  = length(local.delete_user_trigger_roles)
   role   = local.delete_user_trigger_roles[count.index]
   member = "serviceAccount:${google_service_account.delete-user-trigger.email}"
+}
+
+resource "google_project_iam_member" "create-object-trigger" {
+  count  = length(local.create_object_trigger_roles)
+  role   = local.create_object_trigger_roles[count.index]
+  member = "serviceAccount:${google_service_account.create-object-trigger.email}"
 }

@@ -43,12 +43,17 @@ resource "google_service_account" "delete-old-users" {
   display_name = "delete-old-users firebase function service account"
 }
 
-resource "google_service_account" "delete-upload" {
-  account_id   = "delete-upload"
-  display_name = "delete-upload firebase function service account"
+resource "google_service_account" "delete-upload-task" {
+  account_id   = "delete-upload-task"
+  display_name = "delete-upload-task firebase function service account"
 }
 
 resource "google_service_account" "delete-user-trigger" {
   account_id   = "delete-user-trigger"
   display_name = "delete-user-trigger firebase function service account"
+}
+
+resource "google_service_account" "create-object-trigger" {
+  account_id   = "create-object-trigger"
+  display_name = "create-object-trigger firebase function service account"
 }
