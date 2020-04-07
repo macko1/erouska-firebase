@@ -11,7 +11,7 @@ locals {
     "roles/firebase.admin",
     "roles/errorreporting.user",
     "roles/secretmanager.admin",
-    "roles/compute.storageAdmin",
+    "roles/storage.admin",
     "roles/viewer"
   ]
 }
