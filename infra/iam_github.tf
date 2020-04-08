@@ -7,7 +7,8 @@ locals {
   ]
 
   github_homepage_roles = [
-    "roles/firebasehosting.admin"
+    "roles/firebasehosting.admin",
+    "roles/cloudconfig.admin"
   ]
 }
 

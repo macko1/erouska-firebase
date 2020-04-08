@@ -12,7 +12,6 @@ locals {
     "roles/errorreporting.user",
     "roles/secretmanager.admin",
     "roles/storage.admin",
-    "roles/viewer"
   ]
 }
 
