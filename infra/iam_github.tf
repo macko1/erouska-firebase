@@ -3,7 +3,8 @@ locals {
   github_firebase_roles = [
     "roles/firebase.admin",
     "roles/cloudfunctions.admin",
-    "roles/cloudscheduler.admin"
+    "roles/cloudscheduler.admin",
+    "roles/iam.serviceAccountUser"
   ]
 
   github_homepage_roles = [
